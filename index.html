@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, My Baby 🎂</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap');
+*{box-sizing:border-box} body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(135deg,#ff7eb3,#ff758c,#ffd166);color:#fff;min-height:100vh;overflow-x:hidden}
+.container{max-width:900px;margin:auto;padding:24px}.hero{text-align:center;padding:55px 15px 30px}
+h1{font-family:Pacifico,cursive;font-size:clamp(42px,10vw,82px);margin:0 0 10px;text-shadow:0 5px 15px #0003}
+.subtitle{font-size:18px}.card,.panel{background:#ffffff18;border:1px solid #ffffff40;backdrop-filter:blur(12px);border-radius:28px;padding:24px;margin:20px 0;box-shadow:0 15px 40px #8d164633}
+.message{font-family:Pacifico,cursive;font-size:24px;line-height:1.7;text-align:center}
+button{border:0;border-radius:999px;padding:13px 20px;background:#fff;color:#ec477e;font-weight:700;cursor:pointer;margin:6px;box-shadow:0 5px 15px #0002}
+button:hover{transform:translateY(-2px)} .countdown{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.time{background:#fff2;padding:14px 18px;border-radius:18px;min-width:90px;text-align:center}.time b{display:block;font-size:28px}
+.cake{text-align:center;font-size:100px;cursor:pointer;user-select:none}.candles{font-size:52px;letter-spacing:4px}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:18px}
+input[type=file]{display:none}.upload{display:inline-block;background:#fff;color:#ec477e;padding:12px 18px;border-radius:999px;font-weight:700;cursor:pointer}
+.stickers button{font-size:28px;background:#ffffff25;color:#fff}.entries{display:grid;gap:10px;margin-top:15px}.entry{background:#ffffff18;padding:12px 15px;border-radius:16px}.gift{font-size:100px;text-align:center;cursor:pointer;transition:.4s}.gift.open{transform:rotate(10deg) scale(1.15)}#surprise{display:none;text-align:center;font-family:Pacifico;font-size:27px}
+.firework{position:fixed;pointer-events:none;font-size:35px;animation:boom 1.4s forwards;z-index:99}@keyframes boom{0%{transform:scale(.2);opacity:0}35%{opacity:1}100%{transform:scale(3) translate(var(--x),var(--y));opacity:0}}
+.confetti{position:fixed;top:-20px;width:10px;height:16px;z-index:100;animation:fall linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+footer{text-align:center;padding:30px;opacity:.8}
+</style>
+</head>
+<body>
+<div class="container">
+<section class="hero">
+<h1>Happy Birthday! 🎂</h1><div class="subtitle">A little digital celebration made with lots of love 💖</div>
+</section>
+
+<section class="card message">
+"Happy birthday, my baby! 💕 I hope today reminds you how special, loved, and precious you are. May every little wish in your heart find its way to you. Thank you for being someone who makes ordinary moments feel magical. Here's to another beautiful chapter, countless smiles, unforgettable memories, and all the happiness you deserve. I love you more than words can say. 🎀✨"
+</section>
+
+<section class="panel">
+<h2>⏰ Countdown to the Birthday Hour</h2>
+<div class="countdown">
+<div class="time"><b id="d">0</b>Days</div><div class="time"><b id="h">0</b>Hours</div>
+<div class="time"><b id="m">0</b>Minutes</div><div class="time"><b id="s">0</b>Seconds</div>
+</div>
+</section>
+
+<section class="panel">
+<h2>🎵 Birthday Music</h2>
+<p>Tap play to start the celebratory tune.</p>
+<button id="musicBtn">▶ Play Celebration</button>
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a7349f.mp3?filename=happy-birthday-to-you-10760.mp3" type="audio/mpeg">
+</audio>
+</section>
+
+<section class="panel">
+<h2>🕯️ Blow Out the Digital Candles</h2>
+<div class="cake" onclick="blowCandles()" title="Tap to blow">🎂</div>
+<div class="candles" id="candles">🕯️ 🕯️ 🕯️ 🕯️ 🕯️</div>
+<div id="surprise">🎉 SURPRISE! 🎉<br>You're the sweetest part of every celebration. 💖</div>
+</section>
+
+<section class="panel">
+<h2>🎁 Virtual Gift</h2>
+<div class="gift" id="gift" onclick="openGift()">🎁</div>
+<div id="giftText" style="text-align:center;display:none;font-family:Pacifico;font-size:24px">Inside is a whole box of hugs, kisses, and beautiful wishes just for you! 💝</div>
+</section>
+
+<section class="panel">
+<h2>📸 Our Memory Gallery</h2>
+<label class="upload">+ Upload Memories <input id="photos" type="file" accept="image/*" multiple></label>
+<div class="gallery" id="gallery"></div>
+</section>
+
+<section class="panel">
+<h2>💌 Guestbook</h2>
+<div class="stickers">
+<button onclick="addSticker('🎂')">🎂</button><button onclick="addSticker('💖')">💖</button>
+<button onclick="addSticker('🎉')">🎉</button><button onclick="addSticker('🥳')">🥳</button>
+<button onclick="addSticker('🌹')">🌹</button><button onclick="addSticker('✨')">✨</button>
+</div>
+<input id="name" placeholder="Your name" style="padding:13px;border:0;border-radius:14px;margin-top:10px;width:48%">
+<input id="wish" placeholder="Write a birthday wish..." style="padding:13px;border:0;border-radius:14px;margin-top:10px;width:48%">
+<button onclick="addEntry()">Sign Guestbook 💌</button>
+<div class="entries" id="entries"></div>
+<p id="entryCount">0 / 10 entries</p>
+</section>
+<footer>Made with 💗 for the birthday star ✨</footer>
+</div>
+
+<script>
+const birthday = new Date();
+birthday.setHours(birthday.getHours()+1,0,0,0);
+function updateCountdown(){
+ let diff=Math.max(0,birthday-new Date()),sec=Math.floor(diff/1000);
+ d.textContent=Math.floor(sec/86400); h.textContent=Math.floor(sec%86400/3600);
+ m.textContent=Math.floor(sec%3600/60); s.textContent=sec%60;
+}
+setInterval(updateCountdown,1000); updateCountdown();
+
+function confetti(n=120){
+ for(let i=0;i<n;i++){let x=document.createElement('i');x.className='confetti';x.style.left=Math.random()*100+'vw';x.style.background=`hsl(${Math.random()*360},90%,65%)`;x.style.animationDuration=(2+Math.random()*4)+'s';x.style.transform=`rotate(${Math.random()*360}deg)`;document.body.appendChild(x);setTimeout(()=>x.remove(),6500)}
+}
+window.onload=()=>confetti(180);
+
+const music=document.getElementById('music'), musicBtn=document.getElementById('musicBtn');
+musicBtn.onclick=async()=>{if(music.paused){await music.play();musicBtn.textContent='⏸ Pause Celebration'}else{music.pause();musicBtn.textContent='▶ Play Celebration'}};
+
+function blowCandles(){document.getElementById('candles').textContent='💨 🕯️ 🕯️ 🕯️ 🕯️ 🕯️';setTimeout(()=>{document.getElementById('candles').textContent='💨 💨 💨 💨 💨';document.getElementById('surprise').style.display='block';confetti(100)},700)}
+function openGift(){gift.classList.add('open');gift.textContent='💝';giftText.style.display='block';confetti(70)}
+
+photos.onchange=e=>[...e.target.files].forEach(file=>{let img=document.createElement('img');img.src=URL.createObjectURL(file);gallery.appendChild(img)});
+
+let count=0;
+function addSticker(sticker){wish.value=(wish.value?'':'')+sticker+' '}
+function addEntry(){
+ let name=document.getElementById('name').value.trim()||'A friend', text=wish.value.trim()||'Happy birthday! 🎉';
+ count++; let el=document.createElement('div');el.className='entry';el.textContent=name+': '+text;entries.prepend(el);
+ entryCount.textContent=count+' / 10 entries'; nameInputReset(); if(count===10)fireworks();
+}
+function nameInputReset(){name.value='';wish.value=''}
+function fireworks(){
+ for(let i=0;i<45;i++){let f=document.createElement('div');f.className='firework';f.textContent='✨';f.style.left=Math.random()*100+'vw';f.style.top=Math.random()*80+'vh';f.style.setProperty('--x',(Math.random()*300-150)+'px');f.style.setProperty('--y',(Math.random()*300-150)+'px');document.body.appendChild(f);setTimeout(()=>f.remove(),1500)}
+ confetti(250);
+}
+</script>
+</body>
+</html>
